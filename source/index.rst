@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 2
 
    imagesegmentation
+   threedview
 
 Indices and tables
 ==================
