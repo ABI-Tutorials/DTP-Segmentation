@@ -2,23 +2,21 @@
 Image Segmentation 
 ==================
 
-This tutorial is on image segmentation and image data post-processing.  The objectives are to gain a basic understanding of the different types of images frequently acquired from medical devices.  Understand some of the DICOM standard and the information that is useful to us.  Manual and semi-automatic image segmentation and segmented data post-processing.
+This tutorial is on image segmentation and image data post-processing.  The objectives are to gain a basic understanding of the different types of images frequently acquired from medical devices.  Understand some of the DICOM standard and the information that is useful to image segmentation.  Gain some knowledge on manual and semi-automatic image segmentation and be aware of the reasons for post-processing segmented data.
 
 Overview
 ======== 
 
-The Types of images that we come across can be roughly divided into two groups macroscopic anatomical images and microscopic anatomical images.  The macroscopic image modalities that we typically come across are Magnetic Resonance Images (MRI), Computed Tomography (CT) images and Ultrasound (US).  The microscopic images that we use are confocal images.
+Segmentation begins with the acquisition of images.  The images used in our domain originate from medical devices.  The Types of images that we come across can be roughly divided into two groups macroscopic anatomical images and microscopic anatomical images.  The macroscopic image modalities that we typically come across are Magnetic Resonance Images (MRI), Computed Tomography (CT) images and Ultrasound (US).  The microscopic images that we use are confocal images.
 
 Most medical devices store their image output using the the Digital Imaging and Communications in Medicine (DICOM) standard.  The DICOM standard is a standard that covers the handling, storing, printing and transmitting of information in medical imaging.  It includes a file format definition and a network protocol definition.  We shall look at the information that can be stored in the DICOM file format and look at how we can make use of it.
 
-With the information garnered from the DICOM file we will use this information to orient and display the images for visualisation, ready for segmentation.  In the first example the segmentation of the images will use a technique called point-and-click, digitisation, in the second example we will perform semi-automatic segmentation using edge detection and edge erosion.
-
-Finally, we will perform some post-processing on the segmented data to transform the data from the machine or magnet coordintes to heart coordinates.
+With the information garnered from the DICOM file we will orient and display the images for visualisation, ready for segmentation.  In the task 2 the segmentation of the images will use a technique called point-and-click digitisation, in task 3 we will perform semi-automatic segmentation using edge detection and edge erosion.  In task 4 we will perform some post-processing on the segmented data to transform the data from the machine or magnet coordinates to heart coordinates.  Finally, we will put it all together to create a segmentation workflow that will produce two point clouds suitable for left ventricle heart model fitting.
 
 Task 1
 ======
 
-Task one is to investigate the DICOM headers from a set of images stored using the DICOM standard.  It is quite common to see the DICOM standard used interchangeably with the DICOM image format it is important to remember that the DICOM standard is not only for the storing of images.  We will use the MAP Client application and load the 'DTP Segmentation Task 1' workflow, with the workflow loaded you should see something like Figure 1.
+Task one is to investigate the DICOM headers from a set of tagged MR images stored using the DICOM standard.  It is quite common to see the DICOM standard used interchangeably with the DICOM image format it is important to remember that the DICOM standard is not only for the storing of images.  We will use the MAP Client application and load the 'DTP Segmentation Task 1' workflow, with the workflow loaded you should see something like Figure 1.
 
 .. figure:: _images/task1workflow.png
    :align: center
@@ -36,7 +34,7 @@ When we execute this workflow we are presented with Figure 2 an interface for qu
    
    Figure 2: Task 1 DICOM header query interface
    
-In figure 2 we can see a number of the GUI elements. On the left of the screen [1] we can see the DICOM image that we have chosen to query and two combo boxes below from which we can select one to perform a query the identified tag. The query button [2] when clicked will query the selected DICOM image with the header tag from the last activated combo box.  The results of the query will appear on the right-hand side [3]. On the right-hand side we have four text boxes that will be populated with the result of our query.  The element name is related to the DICOM keyword but it is not an exact match, the element representation is defined by the standard and is used to determine the format of the element value. The element value is the actual value of tag queried and the element multiplicity is the number of values in the value element usually the element multiplicity is one.  When the store button [4] is clicked the result of the query edit to the saved queries table [5], Rows in this table maybe deleted by selecting the row to be deleted with the mouse and clicking the remove button.  When the Done button [6] is clicked the workflow will finish and return to the workflow edit screen.
+In Figure 2 we can see a number of the GUI elements. On the left of the screen [1] we can see the DICOM image that we have chosen to query and two combo boxes below from which we can select one to perform a query the identified tag. The query button [2] when clicked will query the selected DICOM image with the header tag from the last activated combo box.  The results of the query will appear on the right-hand side [3]. On the right-hand side we have four text boxes that will be populated with the result of our query.  The element name is related to the DICOM keyword but it is not an exact match, the element representation is defined by the standard and is used to determine the format of the element value. The element value is the actual value of tag queried and the element multiplicity is the number of values in the value element usually the element multiplicity is one.  When the store button [4] is clicked the result of the query edit to the saved queries table [5], Rows in this table maybe deleted by selecting the row to be deleted with the mouse and clicking the remove button.  When the Done button [6] is clicked the workflow will finish and return to the workflow edit screen.
 
 The DICOM standard is a rather large and ungainly document freely available on the `web <http://dicom.nema.org/standard.html>`_, of interest to us here is part three of the standard dealing with Information Object Definitions and part six of the standard dealing with the Data Dictionary in particular table 6-1 which relates Tags, Names, Keywords, Element Representation and Element Multiplicity.  If you take a look at table 6–1 you will see that it is it defines a great number of terms and in any given DICOM file most of these terms will not be defined.  What is of interest here though are the tags relating to the image position in relation to the patient, position of the patient, the pixel spacing, the size of the image and the image data itself.
 
@@ -45,7 +43,7 @@ It is the values taken from these tags that will enable us to correctly orient t
 Task 2
 ======
 
-Task two is to segment the left ventricle.  Using the MAP Client application again, load the 'DTP Segmentation Task 2' workflow.  In this workflow we see five steps there are two image source steps, the heart segmentation step and two point cloud serialisation steps.  In this workflow we have two image source tips one for the long axis images and another for the short axis images. We will also differentiate between the endocardial surface and the epicardial surface of the heart which will result in two separate point clouds.
+Task two is to segment the left ventricle.  Using the MAP Client application again, load the 'DTP Segmentation Task 2' workflow.  In this workflow we see five steps there are two image source steps, the heart segmentation step and two point cloud serialisation steps.  In this workflow we have two image source steps one for the long axis images and another for the short axis images. We will also differentiate between the endocardial surface and the epicardial surface of the heart which will result in two separate point clouds.
 
 When we execute this workflow we are presented with Figure 3.
 
@@ -55,7 +53,7 @@ When we execute this workflow we are presented with Figure 3.
    
    Figure 3: Task 2 heart segmentation interface initial state
    
-In figure 3 we can see on the left a toolbox that allows us to change the state of this segmentation tool, on the right hand side we can see a three-dimensional view of the two sets of DICOM images.  To create this view we have used the
+In Figure 3 we can see on the left a toolbox that allows us to change the state of this segmentation tool, on the right hand side we can see a three-dimensional view of the two sets of DICOM images.  To create this view we have used the
 
  * Pixel spacing
  * Image orientation patient
@@ -63,7 +61,7 @@ In figure 3 we can see on the left a toolbox that allows us to change the state 
  * Rows
  * Columns
  
-information from the DICOM header.  This has placed each image plane in the machine or magnet coordinate system.  
+information from the DICOM header.  This has placed each image plane in the machine or magnet coordinate system.  In the images we are using you will see lines across the image picture, this comes from the saturated MR signals so that we can track myocardial motion. In the images that we see we have straight saturated bands indicating that these are the reference images.
 
 From the view toolbox on the left-hand side we can show the image planes and from the file for box we can load and save our progress. The done button is also in the file toolbox for when we are finished segmenting.
 
@@ -85,7 +83,7 @@ Segmenting this image should result in Figure 5.
    
    Figure 5: Task 2 View of the segmented thirteenth short axis image plane
    
-Continue segmenting the left ventricle using the long axis images to check for consistency.  The end result should look like figure 6.
+Continue segmenting the left ventricle using the long axis images to check for consistency.  The end result should look like Figure 6.
 
 .. figure:: _images/task2segmentation.png
    :align: center
@@ -125,7 +123,7 @@ Make only the 13th image plane visible, on this image plane place the landmarks 
    
 With these three landmarks set we can determine the heart coordinate system. The origin of this system is one third of the way down the base to apex line.  The X axis for the system is increasing from the base point to the apex point the, Y axis is increasing from the base point to the RV point and the cross product of these two vectors defines the Z axis. We make this coordinate system orthogonal by projecting the RV-base line onto the base-apex line.
 
-In figure 8 we can see an axes glyph to represent the heart coordinate system.  This glyph should be consistent with the definition from the previous paragraph. 
+In Figure 8 we can see an axes glyph to represent the heart coordinate system.  This glyph should be consistent with the definition from the previous paragraph. 
 
 .. figure:: _images/task2axesglyph.png
    :align: center
