@@ -16,25 +16,28 @@ With the information garnered from the DICOM file we will orient and display the
 Task 1
 ======
 
-Task one is to investigate the DICOM headers from a set of tagged MR images stored using the DICOM standard.  It is quite common to see the DICOM standard used interchangeably with the DICOM image format it is important to remember that the DICOM standard is not only for the storing of images.  We will use the MAP Client application and load the 'DTP Segmentation Task 1' workflow, with the workflow loaded you should see something like Figure 1.
+Task one is to investigate the DICOM headers from a set of tagged MR images stored using the DICOM standard.  It is quite common to see the DICOM standard used interchangeably with the DICOM image format it is important to remember that the DICOM standard is not only for the storing of images.  We will use the MAP Client application and load the 'DTP Segmentation Task 1' workflow, with the workflow loaded you should see something like :numref:`dtp_cp_seg_tsk1_wkfl`.
 
+.. _dtp_cp_seg_tsk1_wkfl:
 .. figure:: _images/task1workflow.png
    :align: center
    :alt: Task 1 workflow image
    
-   Figure 1: Task 1 wofkflow
+   Task 1 workflow
    
 In this workflow there are three steps, the first step is the image source step from which we will load the DICOM images.  The second step is the DICOM header query step which will be used to query tags from the DICOM image.  The third stick is a simple Python dict serialisation step so that we may store queries for future reference.
 
-When we execute this workflow we are presented with Figure 2 an interface for querying DICOM headers.
+When we execute this workflow we are presented with :numref:`dtp_cp_seg_tsk1_inte` an interface for querying DICOM headers.
    
+   
+.. _dtp_cp_seg_tsk1_inte:
 .. figure:: _images/task1interface.png
    :align: center
    :alt: Task 1 DICOM header query interface
    
-   Figure 2: Task 1 DICOM header query interface
+   DICOM header query interface
    
-In Figure 2 we can see a number of the GUI elements. On the left of the screen [1] we can see the DICOM image that we have chosen to query and two combo boxes below from which we can select one to perform a query the identified tag. The query button [2] when clicked will query the selected DICOM image with the header tag from the last activated combo box.  The results of the query will appear on the right-hand side [3]. On the right-hand side we have four text boxes that will be populated with the result of our query.  The element name is related to the DICOM keyword but it is not an exact match, the element representation is defined by the standard and is used to determine the format of the element value. The element value is the actual value of tag queried and the element multiplicity is the number of values in the value element usually the element multiplicity is one.  When the store button [4] is clicked the result of the query edit to the saved queries table [5], Rows in this table maybe deleted by selecting the row to be deleted with the mouse and clicking the remove button.  When the Done button [6] is clicked the workflow will finish and return to the workflow edit screen.
+In :numref:`dtp_cp_seg_tsk1_inte` we can see a number of the GUI elements. On the left of the screen [1] we can see the DICOM image that we have chosen to query and two combo boxes below from which we can select one to perform a query the identified tag. The query button [2] when clicked will query the selected DICOM image with the header tag from the last activated combo box.  The results of the query will appear on the right-hand side [3]. On the right-hand side we have four text boxes that will be populated with the result of our query.  The element name is related to the DICOM keyword but it is not an exact match, the element representation is defined by the standard and is used to determine the format of the element value. The element value is the actual value of tag queried and the element multiplicity is the number of values in the value element usually the element multiplicity is one.  When the store button [4] is clicked the result of the query edit to the saved queries table [5], Rows in this table maybe deleted by selecting the row to be deleted with the mouse and clicking the remove button.  When the Done button [6] is clicked the workflow will finish and return to the workflow edit screen.
 
 The DICOM standard is a rather large and ungainly document freely available on the `web <http://dicom.nema.org/standard.html>`_, of interest to us here is part three of the standard dealing with Information Object Definitions and part six of the standard dealing with the Data Dictionary in particular table 6-1 which relates Tags, Names, Keywords, Element Representation and Element Multiplicity.  If you take a look at table 6–1 you will see that it is it defines a great number of terms and in any given DICOM file most of these terms will not be defined.  What is of interest here though are the tags relating to the image position in relation to the patient, position of the patient, the pixel spacing, the size of the image and the image data itself.
 
@@ -43,17 +46,18 @@ It is the values taken from these tags that will enable us to correctly orient t
 Task 2
 ======
 
-Task two is to segment the left ventricle.  Using the MAP Client application again, load the 'DTP Segmentation Task 2' workflow.  In this workflow we see five steps there are two image source steps, the heart segmentation step and two point cloud serialisation steps.  In this workflow we have two image source steps one for the long axis images and another for the short axis images. We will also differentiate between the endocardial surface and the epicardial surface of the heart which will result in two separate point clouds.
+Task two is to segment the left ventricle of the heart.  Using the MAP Client application again, load the 'DTP Segmentation Task 2' workflow.  In this workflow we see five steps there are two image source steps, the heart segmentation step and two point cloud serialisation steps.  In this workflow we have two image source steps one for the long axis images and another for the short axis images. We will also differentiate between the endocardial surface and the epicardial surface of the heart which will result in two separate point clouds.
 
-When we execute this workflow we are presented with Figure 3.
+When we execute this workflow we are presented with :numref:`dtp_cp_seg_tsk2_init`.
 
+.. _dtp_cp_seg_tsk2_init:
 .. figure:: _images/task2initial.png
    :align: center
    :alt: Task 2 heart segmentation initial
    
-   Figure 3: Task 2 heart segmentation interface initial state
+   Heart segmentation interface initial state
    
-In Figure 3 we can see on the left a toolbox that allows us to change the state of this segmentation tool, on the right hand side we can see a three-dimensional view of the two sets of DICOM images.  To create this view we have used the
+In :numref:`dtp_cp_seg_tsk2_init` we can see on the left a toolbox that allows us to change the state of this segmentation tool, on the right hand side we can see a three-dimensional view of the two sets of DICOM images.  To create this view we have used the
 
  * Pixel spacing
  * Image orientation patient
@@ -65,31 +69,34 @@ information from the DICOM header.  This has placed each image plane in the mach
 
 From the view toolbox on the left-hand side we can show the image planes and from the file for box we can load and save our progress. The done button is also in the file toolbox for when we are finished segmenting.
 
-Using the view toolbox first hide all the image planes and then make the 13th short axis image plane visible. You should now be looking at something very similar to Figure 4.
+Using the view toolbox first hide all the image planes and then make the 13th short axis image plane visible. You should now be looking at something very similar to :numref:`dtp_cp_seg_tsk2_13th`.
 
+.. _dtp_cp_seg_tsk2_13th:
 .. figure:: _images/task2thirteenth.png
    :align: center
    :alt: Task 2 thirteenth image plane
    
-   Figure 4: Task 2 View of the thirteenth short axis image plane
+   View of the thirteenth short axis image plane
    
 See the :doc:`3D View Help <threedview>` for help on manipulating the view.  Move the image plane to a more suitable view for segmentation.  We wish to segment both the endocardial and epicardial surfaces of the left ventricle. In the segmentation toolbox we can see which surface of the heart we are set up to segment.  In this view the control key is used as a modifier for the left mouse button to add segmentation points to the scene.  With the left mouse button held down we can drag the segmentation points to the desired location.  We can also click on existing segmentation points to adjust their position at a later time.  Segmentation points coloured red will be put into the endocardial set of points, segmentation points coloured green will be put into the epicardial set of points.  Use the heart surface combo box in the segmentation toolbox to change the current point set.
 
-Segmenting this image should result in Figure 5.
+Segmenting this image should result in :numref:`dtp_cp_seg_tsk2_13s`.
 
+.. _dtp_cp_seg_tsk2_13s:
 .. figure:: _images/task2thirteenthsegmented.png
    :align: center
    :alt: Task 2 segmented thirteenth image planes
    
-   Figure 5: Task 2 View of the segmented thirteenth short axis image plane
+   View of the segmented thirteenth short axis image plane
    
-Continue segmenting the left ventricle using the long axis images to check for consistency.  The end result should look like Figure 6.
+Continue segmenting the left ventricle using the long axis images to check for consistency.  The end result should look like :numref:`dtp_cp_seg_tsk2_seg`.
 
+.. _dtp_cp_seg_tsk2_seg:
 .. figure:: _images/task2segmentation.png
    :align: center
    :alt: Task 2 segmented left ventricle
    
-   Figure 6: Task 2 View of the segmented left ventricle
+   View of the segmented left ventricle
    
 Using the save button from the file toolbox save your progress and click the done button to write the two point clouds to disk.
 
@@ -105,31 +112,34 @@ Task 4
 
 In this task we want to transform the data created in tasks 2 and 3 from machine coordinates to heart or model coordinates.  Open the MAP Client workflow 'DTP Segmentation Task 4' and execute it.  You should see the image planes as before.  In this task we need to define the heart coordinate system so that we may contstruct the transformation from machine coordinates to heart coordinates.  We can do this by selecting three landmark points; the Base point, the Apex point, and the RV point.  This will define our heart coordinate system.
 
-From the transform toolbox we can set the current point we are positioning.  Starting with the apex point find the location at the lower pointed end of the heart which defines the bottom of the left ventricle volume.  This can be seen the clearest on the 3rd short axis image plane, Figure 6 shows the apex point.
+From the transform toolbox we can set the current point we are positioning.  Starting with the apex point find the location at the lower pointed end of the heart which defines the bottom of the left ventricle volume.  This can be seen the clearest on the 3rd short axis image plane, :numref:`dtp_cp_seg_tsk2_apex` shows the apex point.
 
+.. _dtp_cp_seg_tsk2_apex:
 .. figure:: _images/task2apex.png
    :align: center
    :alt: Task 2 apex point position
    
-   Figure 6: Task 2 Apex point position in the left ventricle
+   Apex point position in the left ventricle
    
-Make only the 13th image plane visible, on this image plane place the landmarks for the base point and the RV point. The base point is the centre of mass of the left ventricle and the RV point is the centre of mass of the right ventricle. See Figure 7 for an example of these locations.
+Make only the 13th image plane visible, on this image plane place the landmarks for the base point and the RV point. The base point is the centre of mass of the left ventricle and the RV point is the centre of mass of the right ventricle. See :numref:`dtp_cp_seg_tsk2_brv` for an example of these locations.
 
+.. _dtp_cp_seg_tsk2_brv:
 .. figure:: _images/task2baseptrvpt.png
    :align: center
    :alt: Task 2 placement of base point and RV point
    
-   Figure 7: Task 2 Placement of the base point and RV point
+   Placement of the base point and RV point
    
 With these three landmarks set we can determine the heart coordinate system. The origin of this system is one third of the way down the base to apex line.  The X axis for the system is increasing from the base point to the apex point the, Y axis is increasing from the base point to the RV point and the cross product of these two vectors defines the Z axis. We make this coordinate system orthogonal by projecting the RV-base line onto the base-apex line.
 
-In Figure 8 we can see an axes glyph to represent the heart coordinate system.  This glyph should be consistent with the definition from the previous paragraph. 
+In :numref:`dtp_cp_seg_tsk2_axes` we can see an axes glyph to represent the heart coordinate system.  This glyph should be consistent with the definition from the previous paragraph. 
 
+.. _dtp_cp_seg_tsk2_axes:
 .. figure:: _images/task2axesglyph.png
    :align: center
    :alt: Task 2 Axes glyph
    
-   Figure 8: Task 2 Axes glyph representing the heart coordinate system
+   Axes glyph representing the heart coordinate system
    
 From the file toolbox use the save button to save the location of these points then click the done button to complete this workflow.
 
