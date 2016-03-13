@@ -1,5 +1,5 @@
 ==================
-Image Segmentation 
+Image Segmentation
 ==================
 
 This tutorial is on image segmentation and image data post-processing.  The objectives are to gain a basic understanding of the different types of images frequently acquired from medical devices.  Understand some of the DICOM standard and the information that is useful to image segmentation.  Gain some knowledge on manual and semi-automatic image segmentation and be aware of the reasons for post-processing segmented data.
@@ -39,9 +39,14 @@ When we execute this workflow we are presented with :numref:`dtp_cp_seg_tsk1_int
    
 In :numref:`dtp_cp_seg_tsk1_inte` we can see a number of the GUI elements. On the left of the screen [1] we can see the DICOM image that we have chosen to query and two combo boxes below from which we can select one to perform a query the identified tag. The query button [2] when clicked will query the selected DICOM image with the header tag from the last activated combo box.  The results of the query will appear on the right-hand side [3]. On the right-hand side we have four text boxes that will be populated with the result of our query.  The element name is related to the DICOM keyword but it is not an exact match, the element representation is defined by the standard and is used to determine the format of the element value. The element value is the actual value of tag queried and the element multiplicity is the number of values in the value element usually the element multiplicity is one.  When the store button [4] is clicked the result of the query edit to the saved queries table [5], Rows in this table maybe deleted by selecting the row to be deleted with the mouse and clicking the remove button.  When the Done button [6] is clicked the workflow will finish and return to the workflow edit screen.
 
-The DICOM standard is a rather large and ungainly document freely available on the `web <http://dicom.nema.org/standard.html>`_, of interest to us here is part three of the standard dealing with Information Object Definitions and part six of the standard dealing with the Data Dictionary in particular table 6-1 which relates Tags, Names, Keywords, Element Representation and Element Multiplicity.  If you take a look at table 6–1 you will see that it is it defines a great number of terms and in any given DICOM file most of these terms will not be defined.  What is of interest here though are the tags relating to the image position in relation to the patient, position of the patient, the pixel spacing, the size of the image and the image data itself.
+The DICOM standard is a rather large and ungainly document freely available on the `web <http://dicom.nema.org/standard.html>`_, of interest to us here is part three of the standard dealing with Information Object Definitions and part six of the standard dealing with the Data Dictionary in particular table 6-1 which relates Tags, Names, Keywords, Element Representation and Element Multiplicity.  If you take a look at table 6–1 you will see that it is it defines a great number of terms and in any given DICOM file most of these terms will not be defined.  What is of interest here though are the tags relating to the image position in relation to the patient, position of the patient, the pixel spacing, the size of the image and the image data itself. It is the values taken from these tags that will enable us to correctly orient the images of the patient when we come to segment the left ventricle in task two. Also available are some data regarding the actual patient and study.
 
-It is the values taken from these tags that will enable us to correctly orient the images of the patient when we come to segment the left ventricle in task two.
+To finish this task, see if you can locate the following information:
+
+#. What is the age of the patient?
+#. What is the patient position?
+#. Which manufacturer built the equipment?
+#. In pixel spacing, what does *DS* in ``Element representation`` signify?
 
 Task 2
 ======
