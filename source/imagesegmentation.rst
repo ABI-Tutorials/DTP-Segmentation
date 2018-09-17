@@ -2,7 +2,12 @@
 Image Segmentation
 ==================
 
-This tutorial is on image segmentation and image data post-processing.  The objectives are to gain a basic understanding of the different types of images frequently acquired from medical devices. Understand some of the Digital Imaging and Communications in Medicine (DICOM) standard and the information that is useful to image segmentation.  Gain some knowledge on manual and semi-automatic image segmentation and be aware of the reasons for post-processing segmented data.
+This tutorial is on image segmentation and image data post-processing.  The objectives are to gain a basic understanding of the different types of images frequently acquired from medical devices. Understand some of the Digital Imaging and Communications in Medicine (DICOM) standard and the information that is useful to image segmentation.  Gain some knowledge on manual and semi-automatic image segmentation and be aware of the reasons for post-processing segmented data. This tutorial includes following sections:
+
+.. contents:: 
+   :local:
+   :depth: 2
+   :backlinks: top
 
 Overview
 ======== 
@@ -16,7 +21,7 @@ With the information garnered from the DICOM file we will orient and display the
 Task 1
 ======
 
-As mentioned above, task 1 is to investigate the DICOM headers from a set of tagged MR images stored using the DICOM standard.  It is quite common to see the DICOM standard used interchangeably with the DICOM image format. It is important to remember that the DICOM standard is not only for the storing of images.  We will use the MAP Client application and load the 'DTP Image Segmentation Task 1' workflow, with the workflow loaded you should see something like :numref:`dtp_cp_seg_tsk1_wkfl`.
+As mentioned above, task 1 is to investigate the DICOM headers from a set of tagged MR images stored using the DICOM standard.  It is quite common to see the DICOM standard used interchangeably with the DICOM image format. *It is important to remember that the DICOM standard is not only for the storing of images*.  We will use the MAP Client application and load the 'DTP Image Segmentation Task 1' workflow, with the workflow loaded you should see something like :numref:`dtp_cp_seg_tsk1_wkfl`.
 
 .. _dtp_cp_seg_tsk1_wkfl:
 .. figure:: _images/task1workflow.png
@@ -39,10 +44,10 @@ When we *execute* this workflow we are presented with :numref:`dtp_cp_seg_tsk1_i
    :align: center
    :alt: Task 1 DICOM header query interface
    
-   DICOM header query interface
+   DICOM Header Query Interface
    
-In :numref:`dtp_cp_seg_tsk1_inte` we can see a number of the GUI elements. On the left of the screen, **[1]** we can see the *DICOM image* that we have chosen to query and two combo boxes(*DICOM Tag* and *DICOM Keyword*) below from which we can select one to perform a query with the identified tag. The *Query* button **[2]** when clicked will query the selected DICOM image with the header tag from the last activated combo box.  The results of the query will appear on the right-hand side **[3]**. On the right-hand side we have four text boxes (*Element name, Element representation, Element value* and *Element multiplicity*) that will be populated with the result of our query.  The element name is related to the DICOM keyword but it is not an exact match, the element representation is defined by the standard and is used to determine the format of the element value. The element value is the actual value of tag queried and the element multiplicity is the number of values in the value element,usually the element multiplicity is one.  When the *Store* button **[4]** 
-is clicked,the result of the query is saved to the saved queries table **[5]**, rows in this table maybe deleted by selecting the row to be deleted with the mouse and clicking the *Remove* button.  When the *Done* button  **[6]** is clicked the workflow will finish and return to the workflow edit screen.
+In :numref:`dtp_cp_seg_tsk1_inte` we can see a number of the GUI elements. On the left of the screen, [1] we can see the *DICOM image* that we have chosen to query and two combo boxes(*DICOM Tag* and *DICOM Keyword*) below from which we can select one to perform a query with the identified tag. The *Query* button [2] when clicked will query the selected DICOM image with the header tag from the last activated combo box.  The results of the query will appear on the right-hand side [3]. On the right-hand side we have four text boxes (*Element name, Element representation, Element value* and *Element multiplicity*) that will be populated with the result of our query.  The *Element name* is related to the DICOM keyword but it is not an exact match, the *Element representation* is defined by the standard and is used to determine the format of the element value. The *Element value* is the actual value of tag queried and the *Element multiplicity* is the number of values in the value element,usually the element multiplicity is one.  When the *Store* button [4] 
+is clicked,the result of the query is saved to the saved queries table [5], rows in this table maybe deleted by selecting the row to be deleted with the mouse and clicking the *Remove* button.  When the *Done* button [6] is clicked the workflow will finish and return to the workflow edit screen.
 
 The DICOM standard is a rather large and ungainly document freely available on the `web <http://dicom.nema.org/standard.html>`_, of interest to us here is part three of the standard dealing with Information Object Definitions and part six of the standard dealing with the Data Dictionary in particular table 6-1 which relates Tags, Names, Keywords, Element Representation and Element Multiplicity.  If you take a look at table 6–1 you will see that it defines a great number of terms and in any given DICOM file most of these terms will not be defined.  What is of interest here are the tags relating to the image position in relation to the patient, position of the patient, the pixel spacing, the size of the image and the image data itself. It is the values taken from these tags that will enable us to correctly orient the images of the patient when we come to segment the left ventricle in task two. Also available are some data regarding the actual patient and study.
 
