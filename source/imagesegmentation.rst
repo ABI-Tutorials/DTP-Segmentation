@@ -32,7 +32,7 @@ As mentioned above, task 1 is to investigate the DICOM headers from a set of tag
    
 In this workflow there are *three* steps:
 
-#. The **image source** step from which we will load the DICOM images.
+#. The **Image source** step from which we will load the DICOM images.
 #. The **DICOM header query** step which will be used to query tags from the DICOM image.  
 #. The **Python dictionary serialisation** step so that we may store queries for future reference.
 
