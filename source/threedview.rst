@@ -8,7 +8,9 @@ The section describes how you can control the *three-dimensional* view. The thre
 Left Mouse Button
 =================
 
-If you can imagine a sphere around the scene and when you click that you're placing a point on the sphere so that when you drag the *left* mouse as if you are pulling the sphere around by a piece of string attached to that point.  This means that when the whole scene is visible and we click on the edge of the sphere containing the scene we should be able to achieve a pure roll movement or **rotation** of the scene.
+If you can imagine an invisible sphere around the scene (that is everything visible in the view) and then when you use the *left* mouse button and click on a point, the point at which you click is the place where you're setting the starting point for the **rotation** of the sphere.  Now when you drag the mouse the scene is transformed as if you are pulling the sphere around by a piece of string attached to the clicked point. 
+
+We can perform a pure *roll* or *yaw* transform of the scene if we can click outside this invisible sphere (sometimes this is not possible if all of the visible scene is not within the confines of the view) and move the mouse in purely vertical or horizontal manner.  In practice this is quite difficult to do.
 
 By default there are no modify buttons used in this mode, however modifier key functionality is often added to suit a particular application.
 
