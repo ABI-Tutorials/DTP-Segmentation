@@ -2,7 +2,7 @@
 Image Segmentation
 ==================
 
-This tutorial is on image segmentation and image data post-processing.  The objectives are to gain a basic understanding of the different types of images frequently acquired from medical devices. Understand some of the Digital Imaging and Communications in Medicine (DICOM) standard and the information that is useful to image segmentation.  Gain some knowledge on manual and semi-automatic image segmentation and be aware of the reasons for post-processing segmented data. This tutorial includes following sections:
+This tutorial is on image segmentation and image data post-processing.  The objectives are to gain a basic understanding of the different types of images frequently acquired from medical devices. Understand some of the Digital Imaging and Communications in Medicine (DICOM) standard and the information that is useful to image segmentation.  Gain some knowledge on manual and semi-automatic image segmentation and be aware of the reasons for post-processing segmented data. This tutorial includes the following sections:
 
 .. contents:: Contents:
    :local:
@@ -16,7 +16,7 @@ Segmentation begins with the acquisition of images.  The images used in our doma
 
 Most medical devices store their image output using the DICOM standard. The **DICOM standard** is a standard that covers the *handling, storing, printing* and *transmitting* of information in medical imaging.  It includes a file format definition and a network protocol definition.  We shall look at the information that can be stored in the DICOM file format and look at how we can make use of it.
 
-With the information garnered from the DICOM file we will orient and display the images for visualisation, ready for segmentation. The task 1 is to investigate the DICOM headers from a set of tagged MRI images stored using the DICOM standard. In task 2 the segmentation of the images will use a technique called *point-and-click digitiztion*, in task 3 we will perform semi-automatic segmentation using edge detection and edge erosion.  In task 4 we will perform some post-processing on the segmented data to transform the data from the machine or magnet coordinates to heart coordinates.  Finally, we will put it all together to create a segmentation workflow that will produce two point clouds suitable for left ventricle heart model fitting.
+With the information garnered from the DICOM file we will orient and display the images for visualisation, ready for segmentation. The task 1 is to investigate the DICOM headers from a set of tagged MRI images stored using the DICOM standard. In task 2 the segmentation of the images will use a technique called *point-and-click digitisation*, in task 3 we will perform semi-automatic segmentation using edge detection and edge erosion.  In task 4 we will perform some post-processing on the segmented data to transform the data from the machine or magnet coordinates to heart coordinates.  Finally, we will put it all together to create a segmentation workflow that will produce two point clouds suitable for left ventricle heart model fitting.
 
 Task 1
 ======
